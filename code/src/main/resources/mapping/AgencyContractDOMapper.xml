@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youjiao.demo.dao.AgencyContractDOMapper">
+  <resultMap id="BaseResultMap" type="com.youjiao.demo.dataobject.AgencyContractDO">
+    <id column="contract_id" jdbcType="INTEGER" property="contractId" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="start_time" jdbcType="DATE" property="startTime" />
+    <result column="deadline" jdbcType="DATE" property="deadline" />
+    <result column="payment" jdbcType="INTEGER" property="payment" />
+    <result column="payment_type" jdbcType="TINYINT" property="paymentType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    contract_id, agent_id, start_time, deadline, payment, payment_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from agency_contract
+    where contract_id = #{contractId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from agency_contract
+    where contract_id = #{contractId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.youjiao.demo.dataobject.AgencyContractDO">
+    insert into agency_contract (contract_id, agent_id, start_time, 
+      deadline, payment, payment_type
+      )
+    values (#{contractId,jdbcType=INTEGER}, #{agentId,jdbcType=INTEGER}, #{startTime,jdbcType=DATE}, 
+      #{deadline,jdbcType=DATE}, #{payment,jdbcType=INTEGER}, #{paymentType,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiao.demo.dataobject.AgencyContractDO">
+    insert into agency_contract
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractId != null">
+        contract_id,
+      </if>
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="deadline != null">
+        deadline,
+      </if>
+      <if test="payment != null">
+        payment,
+      </if>
+      <if test="paymentType != null">
+        payment_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractId != null">
+        #{contractId,jdbcType=INTEGER},
+      </if>
+      <if test="agentId != null">
+        #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="deadline != null">
+        #{deadline,jdbcType=DATE},
+      </if>
+      <if test="payment != null">
+        #{payment,jdbcType=INTEGER},
+      </if>
+      <if test="paymentType != null">
+        #{paymentType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiao.demo.dataobject.AgencyContractDO">
+    update agency_contract
+    <set>
+      <if test="agentId != null">
+        agent_id = #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="deadline != null">
+        deadline = #{deadline,jdbcType=DATE},
+      </if>
+      <if test="payment != null">
+        payment = #{payment,jdbcType=INTEGER},
+      </if>
+      <if test="paymentType != null">
+        payment_type = #{paymentType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where contract_id = #{contractId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiao.demo.dataobject.AgencyContractDO">
+    update agency_contract
+    set agent_id = #{agentId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=DATE},
+      deadline = #{deadline,jdbcType=DATE},
+      payment = #{payment,jdbcType=INTEGER},
+      payment_type = #{paymentType,jdbcType=TINYINT}
+    where contract_id = #{contractId,jdbcType=INTEGER}
+  </update>
+</mapper>

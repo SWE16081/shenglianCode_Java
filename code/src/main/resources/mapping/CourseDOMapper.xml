@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youjiao.demo.dao.CourseDOMapper">
+  <resultMap id="BaseResultMap" type="com.youjiao.demo.dataobject.CourseDO">
+    <id column="course_id" jdbcType="INTEGER" property="courseId" />
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="use_textbook" jdbcType="BIT" property="useTextbook" />
+    <result column="first_id" jdbcType="INTEGER" property="firstId" />
+    <result column="second_id" jdbcType="INTEGER" property="secondId" />
+    <result column="alive" jdbcType="BIT" property="alive" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    course_id, course_name, use_textbook, first_id, second_id, alive
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from course
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from course
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.youjiao.demo.dataobject.CourseDO" useGeneratedKeys="true" keyProperty="courseId">
+    insert into course (course_id, course_name, use_textbook, 
+      first_id, second_id, alive
+      )
+    values (#{courseId,jdbcType=INTEGER}, #{courseName,jdbcType=VARCHAR}, #{useTextbook,jdbcType=BIT}, 
+      #{firstId,jdbcType=INTEGER}, #{secondId,jdbcType=INTEGER}, #{alive,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiao.demo.dataobject.CourseDO">
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseId != null">
+        course_id,
+      </if>
+      <if test="courseName != null">
+        course_name,
+      </if>
+      <if test="useTextbook != null">
+        use_textbook,
+      </if>
+      <if test="firstId != null">
+        first_id,
+      </if>
+      <if test="secondId != null">
+        second_id,
+      </if>
+      <if test="alive != null">
+        alive,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseId != null">
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="useTextbook != null">
+        #{useTextbook,jdbcType=BIT},
+      </if>
+      <if test="firstId != null">
+        #{firstId,jdbcType=INTEGER},
+      </if>
+      <if test="secondId != null">
+        #{secondId,jdbcType=INTEGER},
+      </if>
+      <if test="alive != null">
+        #{alive,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiao.demo.dataobject.CourseDO">
+    update course
+    <set>
+      <if test="courseName != null">
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="useTextbook != null">
+        use_textbook = #{useTextbook,jdbcType=BIT},
+      </if>
+      <if test="firstId != null">
+        first_id = #{firstId,jdbcType=INTEGER},
+      </if>
+      <if test="secondId != null">
+        second_id = #{secondId,jdbcType=INTEGER},
+      </if>
+      <if test="alive != null">
+        alive = #{alive,jdbcType=BIT},
+      </if>
+    </set>
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiao.demo.dataobject.CourseDO">
+    update course
+    set course_name = #{courseName,jdbcType=VARCHAR},
+      use_textbook = #{useTextbook,jdbcType=BIT},
+      first_id = #{firstId,jdbcType=INTEGER},
+      second_id = #{secondId,jdbcType=INTEGER},
+      alive = #{alive,jdbcType=BIT}
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </update>
+  <!--批量逻辑删除课程-->
+  <update id="deleteCourseList" parameterType="java.util.List">
+    update course
+    set alive = 0
+    where course_id in
+    <foreach item="id" collection="list" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </update>
+</mapper>

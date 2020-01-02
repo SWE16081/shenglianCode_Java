@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youjiao.demo.dao.ChapterDOMapper">
+  <resultMap id="BaseResultMap" type="com.youjiao.demo.dataobject.ChapterDO">
+    <id column="chapter_id" jdbcType="INTEGER" property="chapterId" />
+    <result column="course_id" jdbcType="INTEGER" property="courseId" />
+    <result column="number" jdbcType="TINYINT" property="number" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="alive" jdbcType="BIT" property="alive" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    chapter_id, course_id, number, name, alive, description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chapter
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from chapter
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.youjiao.demo.dataobject.ChapterDO">
+    insert into chapter (chapter_id, course_id, number, 
+      name, alive, description
+      )
+    values (#{chapterId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{number,jdbcType=TINYINT}, 
+      #{name,jdbcType=VARCHAR}, #{alive,jdbcType=BIT}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiao.demo.dataobject.ChapterDO">
+    insert into chapter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="chapterId != null">
+        chapter_id,
+      </if>
+      <if test="courseId != null">
+        course_id,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="alive != null">
+        alive,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="chapterId != null">
+        #{chapterId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="alive != null">
+        #{alive,jdbcType=BIT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiao.demo.dataobject.ChapterDO">
+    update chapter
+    <set>
+      <if test="courseId != null">
+        course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="alive != null">
+        alive = #{alive,jdbcType=BIT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiao.demo.dataobject.ChapterDO">
+    update chapter
+    set course_id = #{courseId,jdbcType=INTEGER},
+      number = #{number,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      alive = #{alive,jdbcType=BIT},
+      description = #{description,jdbcType=VARCHAR}
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </update>
+  <!--批量逻辑删除章节-->
+  <update id="logicDeleteChapterList" parameterType="java.util.List">
+    update chapter
+    set alive=false
+    where course_id in
+    <foreach item="id" collection="list" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </update>
+</mapper>

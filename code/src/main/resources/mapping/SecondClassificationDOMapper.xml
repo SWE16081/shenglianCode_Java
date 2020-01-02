@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youjiao.demo.dao.SecondClassificationDOMapper">
+  <resultMap id="BaseResultMap" type="com.youjiao.demo.dataobject.SecondClassificationDO">
+    <id column="second_id" jdbcType="INTEGER" property="secondId" />
+    <result column="first_id" jdbcType="INTEGER" property="firstId" />
+    <result column="second_name" jdbcType="VARCHAR" property="secondName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    second_id, first_id, second_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from second_classification
+    where second_id = #{secondId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from second_classification
+    where second_id = #{secondId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.youjiao.demo.dataobject.SecondClassificationDO">
+    insert into second_classification (second_id, first_id, second_name
+      )
+    values (#{secondId,jdbcType=INTEGER}, #{firstId,jdbcType=INTEGER}, #{secondName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiao.demo.dataobject.SecondClassificationDO">
+    insert into second_classification
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="secondId != null">
+        second_id,
+      </if>
+      <if test="firstId != null">
+        first_id,
+      </if>
+      <if test="secondName != null">
+        second_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="secondId != null">
+        #{secondId,jdbcType=INTEGER},
+      </if>
+      <if test="firstId != null">
+        #{firstId,jdbcType=INTEGER},
+      </if>
+      <if test="secondName != null">
+        #{secondName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiao.demo.dataobject.SecondClassificationDO">
+    update second_classification
+    <set>
+      <if test="firstId != null">
+        first_id = #{firstId,jdbcType=INTEGER},
+      </if>
+      <if test="secondName != null">
+        second_name = #{secondName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where second_id = #{secondId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiao.demo.dataobject.SecondClassificationDO">
+    update second_classification
+    set first_id = #{firstId,jdbcType=INTEGER},
+      second_name = #{secondName,jdbcType=VARCHAR}
+    where second_id = #{secondId,jdbcType=INTEGER}
+  </update>
+</mapper>

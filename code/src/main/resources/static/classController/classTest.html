@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ClassTest</title>
+    <style>
+        html, body {
+            background-color: #ededed;
+        }
+
+        #cons {
+            height: 1000px;
+            width: 780px;
+            margin-left: 300px;
+            margin-top: 180px;
+            background-color: #505b61;
+        }
+
+        #con {
+            height: 964px;
+            width: 720px;
+            position: absolute;
+            margin-left: 30px;
+            margin-top: 18px;
+        }
+
+        button {
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 32px;
+            display: inline-block;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+
+<body>
+<div id="cons">
+    <div id="con">
+        <button id="getClassList">getClassList</button>
+    </div>
+</div>
+</body>
+<script src='jQuery.js'></script>
+<script>
+    $('#getClassList').click(function () {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/api/class/get-class-list",
+            dataType: "json",
+            data: {'teacherId': '1', 'isArchive': 'true'},
+            success: function (json) {
+                alert(JSON.stringify(json));
+            },
+            error: function () {
+                alert("ajax error");
+            }
+        })
+    });
+
+</script>
+</html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+<changeSet id="T100-20181009-001" author="markfredchen" >
+    <createTable tableName="demo_test" remarks="测试表表">
+        <column name="id" type="bigint" remarks="用户ID,主键">
+            <constraints nullable="false" primaryKey="true" primaryKeyName="pk_demo_test_id"/>
+        </column>
+        <column name="testname" type="varchar(100)" remarks="测试名">
+            <constraints nullable="false"/>
+        </column>
+
+    </createTable>
+</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youjiao.demo.dao.HomeworkDOMapper">
+  <resultMap id="BaseResultMap" type="com.youjiao.demo.dataobject.HomeworkDO">
+    <id column="homework_id" jdbcType="INTEGER" property="homeworkId" />
+    <result column="class_id" jdbcType="INTEGER" property="classId" />
+    <result column="teacher_id" jdbcType="INTEGER" property="teacherId" />
+    <result column="type" jdbcType="BIT" property="type" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    homework_id, class_id, teacher_id, type, title, content, create_time, finish_time, 
+    modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from homework
+    where homework_id = #{homeworkId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from homework
+    where homework_id = #{homeworkId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.youjiao.demo.dataobject.HomeworkDO">
+    insert into homework (homework_id, class_id, teacher_id, 
+      type, title, content, create_time, 
+      finish_time, modify_time)
+    values (#{homeworkId,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, 
+      #{type,jdbcType=BIT}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{finishTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiao.demo.dataobject.HomeworkDO" useGeneratedKeys="true" keyProperty="homeworkId">
+    insert into homework
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="homeworkId != null">
+        homework_id,
+      </if>
+      <if test="classId != null">
+        class_id,
+      </if>
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="finishTime != null">
+        finish_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="homeworkId != null">
+        #{homeworkId,jdbcType=INTEGER},
+      </if>
+      <if test="classId != null">
+        #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null">
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiao.demo.dataobject.HomeworkDO">
+    update homework
+    <set>
+      <if test="classId != null">
+        class_id = #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null">
+        teacher_id = #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=BIT},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null">
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where homework_id = #{homeworkId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiao.demo.dataobject.HomeworkDO">
+    update homework
+    set class_id = #{classId,jdbcType=INTEGER},
+      teacher_id = #{teacherId,jdbcType=INTEGER},
+      type = #{type,jdbcType=BIT},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where homework_id = #{homeworkId,jdbcType=INTEGER}
+  </update>
+</mapper>

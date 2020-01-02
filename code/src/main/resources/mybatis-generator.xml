@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <!-- 为了防止生成的代码中有很多注释，比较难看，加入下面的配置控制 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <!-- 注释控制完毕 -->
+
+        <!-- 数据库连接：数据库地址和账号密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/youjiaodb"
+                        userId="root"
+                        password="">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 数据表对应的model 层  -->
+        <javaModelGenerator targetPackage="com.youjiao.demo.dataobject" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 生成映射文件存放位置 -->
+        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- 生成Dao类存放位置 --><!-- 该配置必须放在后面，否则报错 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.youjiao.demo.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <!-- 生成数据表及对应的类名，并且不要使用Example文件 -->
+        <!-- 生成完成后就注释该表，防止原文件被重复生成和覆盖 -->
+
+        <!-- 管理员表 -->
+        <table tableName="admin" domainObjectName="AdminDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 学生表 --><!-- 或者称为“孩子表” -->
+        <table tableName="student" domainObjectName="StudentDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 父母表 -->
+        <table tableName="parent" domainObjectName="ParentDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 教师表 -->
+        <table tableName="teacher" domainObjectName="TeacherDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 教师教授的班级表 -->
+        <table tableName="teacher_class" domainObjectName="TeacherClassDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 教师教授的课程表 -->
+        <table tableName="teacher_course" domainObjectName="TeacherCourseDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 班级表 --><!-- 班级id，班级名称，班主任id等 -->
+        <table tableName="class" domainObjectName="ClassDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 菜谱表 --><!-- 菜名，原料和图片 -->
+        <table tableName="dishes" domainObjectName="DishesDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 用餐记录表 --><!-- 记录用餐信息id和菜品id -->
+        <table tableName="dishes_record" domainObjectName="DishesRecordDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 用餐信息表 --><!-- 记录用餐日期和用餐类型，如2019/03/01 早餐 -->
+        <table tableName="dishes_record_information" domainObjectName="DishesRecordInformationDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 作业表 --><!-- 老师发布的作业题目，作业类型等信息 -->
+        <table tableName="homework" domainObjectName="HomeworkDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 作业文件表 --><!-- 家长提交的作业文件 -->
+        <table tableName="homework_file" domainObjectName="HomeworkFileDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 公告表 -->
+        <table tableName="notice" domainObjectName="NoticeDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 已读公告人员记录表 -->
+        <table tableName="notice_unread" domainObjectName="NoticeUnreadDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 托管学生交易记录表 --><!-- 关于学生缴费等事件的记录表，目前作用未知 -->
+        <table tableName="student_transaction_record" domainObjectName="StudentTransactionRecordDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 活动表 -->
+        <table tableName="activity" domainObjectName="ActivityDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 代理商表 -->
+        <table tableName="agent" domainObjectName="AgentDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 代理商合约表 -->
+        <table tableName="agency_contract" domainObjectName="AgencyContractDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 课程表 -->
+        <table tableName="course" domainObjectName="CourseDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 章节表 -->
+        <table tableName="chapter" domainObjectName="ChapterDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 教案表 -->
+        <table tableName="lesson_plan" domainObjectName="LessonPlanDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 课程计划表 -->
+        <table tableName="schedule" domainObjectName="ScheduleDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 学期记录表 -->
+        <table tableName="term_record" domainObjectName="TermRecordDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 课程一级分类表 -->
+        <table tableName="first_classification" domainObjectName="FirstClassificationDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 课程二级分类表 -->
+        <table tableName="second_classification" domainObjectName="SecondClassificationDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 固定课程表 -->
+        <table tableName="fixed_course" domainObjectName="FixedCourseDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <!-- 课程教材表 -->
+        <table tableName="textbook" domainObjectName="TextbookDO"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youjiao.demo.dao.TermRecordDOMapper">
+  <resultMap id="BaseResultMap" type="com.youjiao.demo.dataobject.TermRecordDO">
+    <id column="term_id" jdbcType="INTEGER" property="termId" />
+    <result column="year" jdbcType="INTEGER" property="year" />
+    <result column="term_num" jdbcType="TINYINT" property="termNum" />
+    <result column="grade" jdbcType="TINYINT" property="grade" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    term_id, year, term_num, grade
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from term_record
+    where term_id = #{termId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from term_record
+    where term_id = #{termId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.youjiao.demo.dataobject.TermRecordDO">
+    insert into term_record (term_id, year, term_num, 
+      grade)
+    values (#{termId,jdbcType=INTEGER}, #{year,jdbcType=INTEGER}, #{termNum,jdbcType=TINYINT}, 
+      #{grade,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiao.demo.dataobject.TermRecordDO">
+    insert into term_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="termId != null">
+        term_id,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="termNum != null">
+        term_num,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="termId != null">
+        #{termId,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="termNum != null">
+        #{termNum,jdbcType=TINYINT},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiao.demo.dataobject.TermRecordDO">
+    update term_record
+    <set>
+      <if test="year != null">
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="termNum != null">
+        term_num = #{termNum,jdbcType=TINYINT},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=TINYINT},
+      </if>
+    </set>
+    where term_id = #{termId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiao.demo.dataobject.TermRecordDO">
+    update term_record
+    set year = #{year,jdbcType=INTEGER},
+      term_num = #{termNum,jdbcType=TINYINT},
+      grade = #{grade,jdbcType=TINYINT}
+    where term_id = #{termId,jdbcType=INTEGER}
+  </update>
+</mapper>

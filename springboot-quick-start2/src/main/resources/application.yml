@@ -1,0 +1,42 @@
+#spring:
+#  datasource:
+#    username: root
+#    password: root
+#    url: jdbc:mysql://127.0.0.1:3306/test   #test表示连接到test数据库
+#    driver-class-name: com.mysql.jdbc.Driver
+#    type: com.alibaba.druid.pool.DruidDataSource
+spring:
+  datasource:
+    username: postgres
+    password: 123456
+    url: jdbc:postgresql://127.0.0.1:5432/postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+#    控制台显示SQL
+    show-sql: true
+    hibernate:
+#      更新或者创建数据表
+      ddl-auto: update
+  liquibase:
+    enabled: true
+    change-log: classpath:liquibase/master.xml
+#日志
+logging:
+  level:
+    com:
+     example: trace
+  file:
+    path: /spring/log
+#redis
+redis:
+  database: 0
+  host: 127.0.0.1
+  port: 6379
+  password:
+#配置报告
+debug: true
+
+
+
+
+

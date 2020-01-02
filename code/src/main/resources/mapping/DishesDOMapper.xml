@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youjiao.demo.dao.DishesDOMapper">
+  <resultMap id="BaseResultMap" type="com.youjiao.demo.dataobject.DishesDO">
+    <id column="dish_id" jdbcType="INTEGER" property="dishId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="material" jdbcType="VARCHAR" property="material" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="alive" jdbcType="BIT" property="alive" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    dish_id, name, material, img, alive
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dishes
+    where dish_id = #{dishId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dishes
+    where dish_id = #{dishId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.youjiao.demo.dataobject.DishesDO">
+    insert into dishes (dish_id, name, material,
+      img, alive)
+    values (#{dishId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{material,jdbcType=VARCHAR},
+      #{img,jdbcType=VARCHAR}, #{alive,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiao.demo.dataobject.DishesDO">
+    insert into dishes
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dishId != null">
+        dish_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="material != null">
+        material,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="alive != null">
+        alive,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dishId != null">
+        #{dishId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="material != null">
+        #{material,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="alive != null">
+        #{alive,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiao.demo.dataobject.DishesDO">
+    update dishes
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="material != null">
+        material = #{material,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="alive != null">
+        alive = #{alive,jdbcType=BIT},
+      </if>
+    </set>
+    where dish_id = #{dishId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiao.demo.dataobject.DishesDO">
+    update dishes
+    set name = #{name,jdbcType=VARCHAR},
+      material = #{material,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      alive = #{alive,jdbcType=BIT}
+    where dish_id = #{dishId,jdbcType=INTEGER}
+  </update>
+  <!--批量删除 逻辑-->
+  <delete id="deleteDishesListLogic" parameterType="java.util.List">
+    update dishes
+    set alive = 0
+    where dish_id in
+    <foreach item="id" collection="list" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+  <!--批量删除 物理-->
+  <delete id="deleteDishesListPhysics" parameterType="java.util.List">
+    delete from dishes
+    where dish_id in
+    <foreach item="id" collection="list" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+</mapper>

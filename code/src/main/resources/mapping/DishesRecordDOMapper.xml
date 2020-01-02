@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youjiao.demo.dao.DishesRecordDOMapper">
+  <resultMap id="BaseResultMap" type="com.youjiao.demo.dataobject.DishesRecordDO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dish_id" jdbcType="INTEGER" property="dishId" />
+    <result column="record_id" jdbcType="INTEGER" property="recordId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dish_id, record_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dishes_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dishes_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.youjiao.demo.dataobject.DishesRecordDO">
+    insert into dishes_record (id, dish_id, record_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{dishId,jdbcType=INTEGER}, #{recordId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiao.demo.dataobject.DishesRecordDO">
+    insert into dishes_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dishId != null">
+        dish_id,
+      </if>
+      <if test="recordId != null">
+        record_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dishId != null">
+        #{dishId,jdbcType=INTEGER},
+      </if>
+      <if test="recordId != null">
+        #{recordId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiao.demo.dataobject.DishesRecordDO">
+    update dishes_record
+    <set>
+      <if test="dishId != null">
+        dish_id = #{dishId,jdbcType=INTEGER},
+      </if>
+      <if test="recordId != null">
+        record_id = #{recordId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiao.demo.dataobject.DishesRecordDO">
+    update dishes_record
+    set dish_id = #{dishId,jdbcType=INTEGER},
+      record_id = #{recordId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <!--批量插入用餐记录表的信息-->
+    <insert id="insertToDishesRecord" parameterType="java.util.List">
+        insert into dishes_record(id, record_id, dish_id)
+        value
+        <foreach item="dishId" collection="list" separator=",">
+            ( null , #{recordId} , #{dishId} )
+        </foreach>
+    </insert>
+    <!--批量删除用餐记录表的信息-->
+    <delete id="deleteDishesRecordList" parameterType="java.util.List">
+        delete from dishes_record
+        where record_id in
+        <foreach item="recordId" collection="list" open="(" close=")" separator=",">
+            #{recordId}
+        </foreach>
+    </delete>
+</mapper>
