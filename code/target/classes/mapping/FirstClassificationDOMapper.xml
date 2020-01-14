@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youjiao.demo.dao.FirstClassificationDOMapper">
+  <resultMap id="BaseResultMap" type="com.youjiao.demo.dataobject.FirstClassificationDO">
+    <id column="first_id" jdbcType="INTEGER" property="firstId" />
+    <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    first_id, first_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from first_classification
+    where first_id = #{firstId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from first_classification
+    where first_id = #{firstId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.youjiao.demo.dataobject.FirstClassificationDO" useGeneratedKeys="true" keyProperty="firstId">
+    insert into first_classification (first_id, first_name)
+    values (#{firstId,jdbcType=INTEGER}, #{firstName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiao.demo.dataobject.FirstClassificationDO">
+    insert into first_classification
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="firstId != null">
+        first_id,
+      </if>
+      <if test="firstName != null">
+        first_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="firstId != null">
+        #{firstId,jdbcType=INTEGER},
+      </if>
+      <if test="firstName != null">
+        #{firstName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiao.demo.dataobject.FirstClassificationDO">
+    update first_classification
+    <set>
+      <if test="firstName != null">
+        first_name = #{firstName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where first_id = #{firstId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiao.demo.dataobject.FirstClassificationDO">
+    update first_classification
+    set first_name = #{firstName,jdbcType=VARCHAR}
+    where first_id = #{firstId,jdbcType=INTEGER}
+  </update>
+</mapper>

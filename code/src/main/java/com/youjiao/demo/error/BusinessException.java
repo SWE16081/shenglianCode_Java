@@ -5,14 +5,15 @@ import com.youjiao.demo.util.MyExceptionUtil;
 
 public class BusinessException extends Exception implements CommonError {
 
-    private Exception exception;
-    private CommonError commonError;
+        private Exception exception;
+        private CommonError commonError;
 
     public BusinessException(CommonError commonError) {
-        this(null, commonError);
+        this(null, commonError);//调用其他构造函数
     }
 
     public BusinessException(CommonError commonError, String msg) {
+
         this(null, commonError, msg);
     }
 

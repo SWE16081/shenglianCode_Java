@@ -28,7 +28,7 @@ public final class MyLog {
 
     /**
      * @author Zjp
-     * 一般不使用。标记潜在会出错的位置
+     * `
      */
     public static void warn(String msg) {
         logger.warn(msg);

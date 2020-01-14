@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youjiao.demo.dao.LessonPlanDOMapper">
+  <resultMap id="BaseResultMap" type="com.youjiao.demo.dataobject.LessonPlanDO">
+    <id column="lesson_plan_id" jdbcType="INTEGER" property="lessonPlanId" />
+    <result column="chapter_id" jdbcType="INTEGER" property="chapterId" />
+    <result column="file_url" jdbcType="VARCHAR" property="fileUrl" />
+    <result column="commit_time" jdbcType="TIMESTAMP" property="commitTime" />
+    <result column="filename" jdbcType="VARCHAR" property="filename" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    lesson_plan_id, chapter_id, file_url, commit_time, filename
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lesson_plan
+    where lesson_plan_id = #{lessonPlanId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from lesson_plan
+    where lesson_plan_id = #{lessonPlanId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.youjiao.demo.dataobject.LessonPlanDO">
+    insert into lesson_plan (lesson_plan_id, chapter_id, file_url, 
+      commit_time, filename)
+    values (#{lessonPlanId,jdbcType=INTEGER}, #{chapterId,jdbcType=INTEGER}, #{fileUrl,jdbcType=VARCHAR}, 
+      #{commitTime,jdbcType=TIMESTAMP}, #{filename,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiao.demo.dataobject.LessonPlanDO">
+    insert into lesson_plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lessonPlanId != null">
+        lesson_plan_id,
+      </if>
+      <if test="chapterId != null">
+        chapter_id,
+      </if>
+      <if test="fileUrl != null">
+        file_url,
+      </if>
+      <if test="commitTime != null">
+        commit_time,
+      </if>
+      <if test="filename != null">
+        filename,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lessonPlanId != null">
+        #{lessonPlanId,jdbcType=INTEGER},
+      </if>
+      <if test="chapterId != null">
+        #{chapterId,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null">
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="commitTime != null">
+        #{commitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filename != null">
+        #{filename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiao.demo.dataobject.LessonPlanDO">
+    update lesson_plan
+    <set>
+      <if test="chapterId != null">
+        chapter_id = #{chapterId,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null">
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="commitTime != null">
+        commit_time = #{commitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filename != null">
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lesson_plan_id = #{lessonPlanId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiao.demo.dataobject.LessonPlanDO">
+    update lesson_plan
+    set chapter_id = #{chapterId,jdbcType=INTEGER},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      commit_time = #{commitTime,jdbcType=TIMESTAMP},
+      filename = #{filename,jdbcType=VARCHAR}
+    where lesson_plan_id = #{lessonPlanId,jdbcType=INTEGER}
+  </update>
+</mapper>

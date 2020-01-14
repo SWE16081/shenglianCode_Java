@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youjiao.demo.dao.AgentDOMapper">
+  <resultMap id="BaseResultMap" type="com.youjiao.demo.dataobject.AgentDO">
+    <id column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agent_name" jdbcType="VARCHAR" property="agentName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="level" jdbcType="TINYINT" property="level" />
+    <result column="telephone" jdbcType="CHAR" property="telephone" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="first_time" jdbcType="DATE" property="firstTime" />
+    <result column="deadline" jdbcType="DATE" property="deadline" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    agent_id, agent_name, name, level, telephone, location, first_time, deadline
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from agent
+    where agent_id = #{agentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from agent
+    where agent_id = #{agentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.youjiao.demo.dataobject.AgentDO" useGeneratedKeys="true" keyProperty="agentId">
+    insert into agent (agent_id, agent_name, name, 
+      level, telephone, location, 
+      first_time, deadline)
+    values (#{agentId,jdbcType=INTEGER}, #{agentName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{level,jdbcType=TINYINT}, #{telephone,jdbcType=CHAR}, #{location,jdbcType=VARCHAR}, 
+      #{firstTime,jdbcType=DATE}, #{deadline,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiao.demo.dataobject.AgentDO">
+    insert into agent
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="agentName != null">
+        agent_name,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+      <if test="firstTime != null">
+        first_time,
+      </if>
+      <if test="deadline != null">
+        deadline,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="agentId != null">
+        #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="agentName != null">
+        #{agentName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=CHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="firstTime != null">
+        #{firstTime,jdbcType=DATE},
+      </if>
+      <if test="deadline != null">
+        #{deadline,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiao.demo.dataobject.AgentDO">
+    update agent
+    <set>
+      <if test="agentName != null">
+        agent_name = #{agentName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=TINYINT},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=CHAR},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="firstTime != null">
+        first_time = #{firstTime,jdbcType=DATE},
+      </if>
+      <if test="deadline != null">
+        deadline = #{deadline,jdbcType=DATE},
+      </if>
+    </set>
+    where agent_id = #{agentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiao.demo.dataobject.AgentDO">
+    update agent
+    set agent_name = #{agentName,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      level = #{level,jdbcType=TINYINT},
+      telephone = #{telephone,jdbcType=CHAR},
+      location = #{location,jdbcType=VARCHAR},
+      first_time = #{firstTime,jdbcType=DATE},
+      deadline = #{deadline,jdbcType=DATE}
+    where agent_id = #{agentId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -77,6 +77,7 @@ public class AdminController extends BaseController {
         MySessionUtil.setAttribute(Constants.USER_NAME_SESSION, adminDO.getName());
         MySessionUtil.setAttribute(Constants.JURISDICTION_SESSION, adminDO.getJurisdiction());
         MySessionUtil.setAttribute(Constants.SCHOOL_ID_SESSION, adminDO.getSchoolId());
+
         String schoolName = adminAgentService.findSchoolNameBySchoolId(adminDO.getSchoolId());
         //用户登录成功标志
         MySessionUtil.setAttribute(Constants.USER_LOGIN_SESSION, true);

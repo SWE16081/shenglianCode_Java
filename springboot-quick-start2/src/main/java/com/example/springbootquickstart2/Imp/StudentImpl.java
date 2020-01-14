@@ -60,7 +60,7 @@ public class StudentImpl implements StudentService {
             studentRepository.updataStudent(studentname,studentid,time);
         } catch (Exception e) {
             System.out.println("WRONG FORMAT!");
-//            return ApiReturnInfo.fail();
+            return ApiReturnInfo.fail();
         }
 
         return ApiReturnInfo.success();

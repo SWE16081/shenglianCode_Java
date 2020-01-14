@@ -25,6 +25,10 @@ public class MyWebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/findbyone2")
                 .excludePathPatterns("/cachettest")
                 .excludePathPatterns("/saveStudent")
+                 .excludePathPatterns("/adminRegister")
+                .excludePathPatterns("/selectUser")
+                .excludePathPatterns("/captcha")
+                .excludePathPatterns("/loginCheck")
                 .excludePathPatterns("/selStudentByTwo");
 
     }

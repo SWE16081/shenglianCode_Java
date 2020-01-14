@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youjiao.demo.dao.TeacherDOMapper">
+  <resultMap id="BaseResultMap" type="com.youjiao.demo.dataobject.TeacherDO">
+    <id column="teacher_id" jdbcType="INTEGER" property="teacherId" />
+    <result column="teacher_code" jdbcType="VARCHAR" property="teacherCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="id_number" jdbcType="CHAR" property="idNumber" />
+    <result column="telephone" jdbcType="CHAR" property="telephone" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="school_id" jdbcType="INTEGER" property="schoolId" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="position" jdbcType="TINYINT" property="position" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="alive" jdbcType="BIT" property="alive" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    teacher_id, teacher_code, name, sex, id_number, telephone, password, school_id, birthday, 
+    position, education, major, email, avatar, alive
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from teacher
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from teacher
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.youjiao.demo.dataobject.TeacherDO">
+    insert into teacher (teacher_id, teacher_code, name, 
+      sex, id_number, telephone, password, 
+      school_id, birthday, position, 
+      education, major, email, 
+      avatar, alive)
+    values (#{teacherId,jdbcType=INTEGER}, #{teacherCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=BIT}, #{idNumber,jdbcType=CHAR}, #{telephone,jdbcType=CHAR}, #{password,jdbcType=VARCHAR}, 
+      #{schoolId,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, #{position,jdbcType=TINYINT}, 
+      #{education,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{avatar,jdbcType=VARCHAR}, #{alive,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiao.demo.dataobject.TeacherDO">
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+      <if test="teacherCode != null">
+        teacher_code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="idNumber != null">
+        id_number,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="schoolId != null">
+        school_id,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="alive != null">
+        alive,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherCode != null">
+        #{teacherCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=BIT},
+      </if>
+      <if test="idNumber != null">
+        #{idNumber,jdbcType=CHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=CHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolId != null">
+        #{schoolId,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=TINYINT},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="alive != null">
+        #{alive,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiao.demo.dataobject.TeacherDO">
+    update teacher
+    <set>
+      <if test="teacherCode != null">
+        teacher_code = #{teacherCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=BIT},
+      </if>
+      <if test="idNumber != null">
+        id_number = #{idNumber,jdbcType=CHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=CHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolId != null">
+        school_id = #{schoolId,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=TINYINT},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="alive != null">
+        alive = #{alive,jdbcType=BIT},
+      </if>
+    </set>
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiao.demo.dataobject.TeacherDO">
+    update teacher
+    set teacher_code = #{teacherCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=BIT},
+      id_number = #{idNumber,jdbcType=CHAR},
+      telephone = #{telephone,jdbcType=CHAR},
+      password = #{password,jdbcType=VARCHAR},
+      school_id = #{schoolId,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=DATE},
+      position = #{position,jdbcType=TINYINT},
+      education = #{education,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      alive = #{alive,jdbcType=BIT}
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </update>
+  <!--逻辑删除教师-->
+  <update id="updateTeacherAliveByTeacherId" parameterType="java.util.List">
+    update teacher
+    set alive = false
+    where teacher_id in
+    <foreach collection="list" item="item" open="(" close=")" separator=",">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+  </update>
+</mapper>

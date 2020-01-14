@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -25,8 +26,8 @@ class SpringbootQuickStart2ApplicationTests {
     StringRedisTemplate stringRedisTemplate;//操作k-v都是字符串的
     @Autowired
     RedisTemplate redisTemplate;//k-v都是对象的
-    @Autowired
-    RedisTemplate<Object, Student> studentRedisTemplate;
+//    @Autowired
+//    RedisTemplate<Object, Student> studentRedisTemplate;
     /*
     * Redis常见的五大类型数据
     * String,List(列表),Set(集合),Hash(散列),zSet(有序集合)
@@ -38,11 +39,7 @@ class SpringbootQuickStart2ApplicationTests {
     * */
     @Test
     void contextLoads() throws SQLException {
-//        System.out.println(dataSource.getClass());
-//        Connection connection=dataSource.getConnection();
-//        System.out.println("111");
-//        System.out.println(connection);
-//        connection.close();
+
         Logger logger= LoggerFactory.getLogger(getClass());
         logger.trace("这是trace日志");
         logger.debug("这是debug日志");
@@ -50,13 +47,17 @@ class SpringbootQuickStart2ApplicationTests {
         logger.warn("这是warn日志");
         logger.error("这是error日志");
     }
+    /*
+    *
+    * */
     @Test
     public void test(){
-//        stringRedisTemplate.opsForValue().append("msg","helloasd");
-//        String msg =stringRedisTemplate.opsForValue().get("msg");
-//        System.out.println(msg);
-//          stringRedisTemplate.opsForList().leftPush("mylist","1");
-//          stringRedisTemplate.opsForList().leftPush("mylist","2");
+        stringRedisTemplate.opsForValue().append("msg","helloasd");
+        String msg =stringRedisTemplate.opsForValue().get("msg");
+        System.out.println(msg);
+          stringRedisTemplate.opsForList().leftPush("mylist","1");
+          stringRedisTemplate.opsForList().leftPush("mylist","2");
+
 
 
     }
@@ -73,6 +74,17 @@ class SpringbootQuickStart2ApplicationTests {
         set.add("11");
         redisTemplate.opsForValue().set("asdasd",set);
 //        studentRedisTemplate.opsForValue().set("set3",set);
+
+
     }
+    @Test
+    public void databasetest() throws SQLException {
+                System.out.println(dataSource.getClass());
+        Connection connection=dataSource.getConnection();
+        System.out.println("111");
+        System.out.println(connection);
+        connection.close();
+    }
+
 
 }

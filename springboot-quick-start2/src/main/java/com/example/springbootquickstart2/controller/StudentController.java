@@ -1,12 +1,10 @@
 package com.example.springbootquickstart2.controller;
 
-import com.example.springbootquickstart2.Imp.StudentImpl;
 import com.example.springbootquickstart2.entity.Student;
 import com.example.springbootquickstart2.service.StudentService;
 
 import com.example.springbootquickstart2.util.ApiReturnInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
