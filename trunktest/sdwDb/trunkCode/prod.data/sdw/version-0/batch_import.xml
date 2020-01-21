@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="create.table" author="chenxs">
+        <createTable tableName="batch_import" remarks="批量导入信息表">
+            <column name="id" type="bigint" remarks="唯一标识" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(128)" remarks="姓名"/>
+            <column name="id_card " type="varchar(64)" remarks="选手身份证号"/>
+            <column name="gender " type="varchar(32)" remarks="性别"/>
+            <column name="birth" type="varchar(128)" remarks="出生日期"/>
+            <column name="parent_name" type="varchar(128)" remarks="家长姓名"/>
+            <column name="phone" type="varchar(64)" remarks="电话"/>
+            <column name="address" type="varchar(256)" remarks="联系地址"/>
+            <column name="email" type="varchar(64)" remarks="e-mail"/>
+            <column name="school" type="varchar(128)" remarks="学校"/>
+            <column name="teacher" type="varchar(64)" remarks="指导老师"/>
+            <column name="teacher_phone" type="varchar(64)" remarks="指导老师手机或固话"/>
+            <column name="group_type_name" type="varchar(64)" remarks="组别分类"/>
+            <column name="group_name" type="varchar(64)" remarks="组别"/>
+            <column name="unit" type="varchar(64)" remarks="报名点"/>
+            <column name="song_name1" type="varchar(1024)" remarks="曲名1含作品号"/>
+            <column name="composer1" type="varchar(512)" remarks="作曲家1"/>
+            <column name="time_length1" type="varchar(64)" remarks="曲目1时长"/>
+            <column name="song_name2" type="varchar(1024)" remarks="曲名2含作品号"/>
+            <column name="composer2" type="varchar(512)" remarks="作曲家2"/>
+            <column name="time_length2" type="varchar(64)" remarks="曲目2时长"/>
+            <column name="status" type="int" remarks="状态：-1-删除，0-待处理，1-处理成功，2-失败"/>
+            <column name="result" type="varchar(256)" remarks="结果"/>
+
+            <column name="create_time " type="bigint" remarks="创建时间"/>
+            <column name="modify_time" type="bigint" remarks="修改时间"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

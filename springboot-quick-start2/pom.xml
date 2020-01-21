@@ -29,6 +29,11 @@
                 <!--</exclusion>-->
             <!--</exclusions>-->
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring‐boot‐starter</artifactId>-->
+        <!--</dependency>-->
         <!--引入Servlet其他容器 jetty-->
         <!--<dependency>-->
             <!--<groupId>org.springframework.boot</groupId>-->
@@ -64,10 +69,7 @@
             <artifactId>liquibase-core</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring‐boot‐starter</artifactId>
-        </dependency>
+
          <!--引入日志-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -153,11 +155,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <fork>true</fork>
-                    <!--增加jvm参数-->
-                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
-                </configuration>
+                <!--<configuration>-->
+                    <!--<fork>true</fork>-->
+                    <!--&lt;!&ndash;增加jvm参数&ndash;&gt;-->
+                    <!--<jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>-->
+                <!--</configuration>-->
             </plugin>
         </plugins>
     </build>

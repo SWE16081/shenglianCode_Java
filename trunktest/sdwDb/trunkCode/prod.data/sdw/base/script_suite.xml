@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <include file="prod.data/sdw/base/user_info.xml"/>
+    <include file="prod.data/sdw/base/authority_group.xml"/>
+    <include file="prod.data/sdw/base/authority_info.xml"/>
+    <include file="prod.data/sdw/base/role_info.xml"/>
+    <include file="prod.data/sdw/base/role_authority.xml"/>
+    <include file="prod.data/sdw/base/role_user.xml"/>
+
+</databaseChangeLog>

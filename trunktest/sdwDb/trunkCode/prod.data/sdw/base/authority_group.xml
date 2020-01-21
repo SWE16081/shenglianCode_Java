@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="create.table" author="linjh">
+        <createTable tableName="authority_group" remarks="权限组">
+            <column name="id" type="bigint" remarks="主键" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="group_name" type="varchar(100)" remarks="名称">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="group_type" type="smallint" remarks="权限组类别:0菜单、1权限控制组、2其他业务分类" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="action_url" type="varchar(300)" remarks="访问地址">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="url_filters" type="varchar(1000)" remarks="过滤权限">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="sort_num" type="smallint" remarks="排序">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="delete_status" type="smallint" remarks="删除标志：0否、1是" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="sys_built_in" type="smallint" remarks="是否系统内置：0否、1是" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="alert.1" author="linjh">
+        <sql>
+            INSERT INTO `authority_group` (`id`, `group_name`,`group_type`, `action_url`, `url_filters`, `sort_num`, `delete_status`,
+            `sys_built_in`) VALUES (-1, '系统管理', 0, '', '', 999, 0, 1);
+            INSERT INTO `authority_group` (`id`, `group_name`,`group_type`, `action_url`, `url_filters`, `sort_num`, `delete_status`,
+            `sys_built_in`) VALUES (-2, '通用免过滤url', 1, '', '/personal/welcome', 1000, 0, 1);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--基础配置-->
+    <!--pom.xml当前版本-->
+    <modelVersion>4.0.0</modelVersion>
+    <!--主项目的标识属于哪个公司(公司网址+项目名)
+    并且配置时生成的路径也是由此生成， 如com.winner.trade，maven会将该项目打成的jar包放本地路径：/com/winner/trade
+    -->
+    <groupId>com.sdw</groupId>
+    <!--模块标识 实际项目的模块（项目名+模块名）
+     本项目的唯一ID，一个groupId下面可能多个项目，就是靠artifactId来区分的
+    -->
+    <artifactId>sdwDb</artifactId>
+    <!--本项目当前所处版本号-->
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <mysql.version>5.1.25</mysql.version>
+        <!--<postgresql.version>42.2.9</postgresql.version>-->
+    </properties>
+
+    <!--dependencies放置各个依赖，对应着每个jar包 groupId依赖名称 artifactId依赖id version依赖版本-->
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <!--引入postgresql驱动-->
+        <!--<dependency>-->
+            <!--<groupId>org.postgresql</groupId>-->
+            <!--<artifactId>postgresql</artifactId>-->
+            <!--<version>${postgresql.version}</version>-->
+        <!--</dependency>-->
+    </dependencies>
+
+    <!--build 为构建配置-->
+    <!--build下放的是插件列表-->
+    <build>
+        <!--  finalName产生的构件的文件名，默认值是${artifactId}-${version}。 -->
+        <finalName>sdwDB</finalName>
+        <!-- resources<resource项目相关的所有资源路径列表，例如和项目相关的配置文件、属性文件，这些资源被包含在最终的打包文件里。 -->
+        <resources>
+            <resource>
+                <!--是否使用参数值代替参数名。参数值取自properties元素或者文件里配置的属性，文件在filters元素里列出。 -->
+                <filtering>false</filtering>
+                 <!--描述存放资源的目录，该路径相对POM路径-->
+                <directory>${project.basedir}</directory>
+                <excludes>
+                    <exclude>test.properties</exclude>
+                    <exclude>pom.xml</exclude>
+                    <exclude>target/**</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <defaultGoal>compile</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.5</version>
+                <!--排除的模式列表 如果<include>与<exclude>划定的范围存在冲突，以<exclude>为准-->
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>ant-compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target if="ant.target">
+                                <ant antfile="${project.build.outputDirectory}/build.xml"
+                                     dir="${project.build.outputDirectory}" target="${ant.target}"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>jar</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                    <classpathPrefix>lib/</classpathPrefix>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>test</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <id>ant-copy</id>
+                                <phase>generate-resources</phase>
+                                <configuration>
+                                    <target>
+                                        <copy file="${project.basedir}/test.properties"
+                                              tofile="${project.build.outputDirectory}/build.properties"/>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <id>ant-copy</id>
+                                <phase>generate-resources</phase>
+                                <configuration>
+                                    <target>
+                                        <copy file="${project.basedir}/prod.properties"
+                                              tofile="${project.build.outputDirectory}/build.properties"/>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

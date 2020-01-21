@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="create.table" author="linjh">
+        <createTable tableName="user_info" remarks="用户信息表">
+            <column name="id" type="bigint" remarks="主键" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="user_name" type="varchar(100)" remarks="用户名">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="password" type="varchar(100)" remarks="密码">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="salt" type="varchar(100)" remarks="盐">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="true_name" type="varchar(25)" remarks="真实姓名">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="email" type="varchar(150)" remarks="邮箱地址">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="sex" type="smallint" remarks="性别:0男、1女；2未知">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="create_time" type="bigint" remarks="创建时间">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="smallint" remarks="状态:0待激活；1激活；2冻结">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="operate_time" type="bigint" remarks="操作时间">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="operate_user_id" type="bigint" remarks="操作人id">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="sys_built_in" type="smallint" remarks="是否系统内置：0否、1是" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="alert.1" author="linjh">
+        <sql>
+            INSERT INTO `user_info` (`id`, `user_name`, `password`, `salt`, `true_name`, `email`, `sex`, `create_time`,
+            `status`, `operate_time`, `operate_user_id`, `sys_built_in`) VALUES (-1, 'admin_su',
+            'xcsO1S6+IdiyEIYajwEGcTIXE8kiP2ap4l9uOMul1BY=', 'YWhDIahrxYJtUm72esYmzg==', 'admin_su', 'service@nqzywhcb.com',
+            NULL,
+            1445244857669, 0, NULL, NULL,1);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

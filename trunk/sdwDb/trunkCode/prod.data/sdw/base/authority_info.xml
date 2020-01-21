@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="create.table" author="linjh">
+        <createTable tableName="authority_info" remarks="权限信息">
+            <column name="id" type="bigint" remarks="主键" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="group_id" type="bigint" remarks="所属权限组ID">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="authority_type" type="smallint" remarks="权限类别:0菜单、1按钮；2访问地址">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="authority_sign" type="varchar(200)" remarks="权限唯一标识符" defaultValue="default">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="authority_name" type="varchar(100)" remarks="权限名称">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="action_url" type="varchar(300)" remarks="访问地址">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="url_filters" type="varchar(1000)" remarks="过滤权限">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="sort_num" type="smallint" remarks="排序：根据菜单组排序">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="delete_status" type="smallint" remarks="删除标志：0否、1是" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="sys_built_in" type="smallint" remarks="是否系统内置：0否、1是" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="parent_id" type="bigint" remarks="上一节点id">
+                <constraints nullable="true"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="alert.1" author="linjh">
+        <sql>
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-19, -1, 0,
+            'userConfig', '用户管理', '/personal/user/pageList', '', 19, 0, 1, NULL);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-18, -1, 1,
+            'roleConfig-removeGrantUser', '取消用户授权', '', '/personal/role/removeGrantUser4Role', 18, 0, 1, -12);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-17, -1, 1,
+            'roleConfig-delRole', '删除', '', '/personal/role/delRole', 17, 0, 1, -12);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-16, -1, 1,
+            'roleConfig-modifyRole', '编辑', '', '/personal/role/toModifyRole;/personal/role/saveRole', 16, 0, 1, -12);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-15, -1, 1,
+            'roleConfig-grantUser', '关联用户', '',
+            '/personal/role/toUserRelation;/personal/role/grantUser2Role;/personal/role/ajaxPageListUR;/personal/role/ajaxPageListURHasGrant',
+            15, 0, 1, -12);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-14, -1, 1,
+            'roleConfig-grantAuthority', '关联权限', '',
+            '/personal/role/toAuthorityRelation;/personal/role/grantAuthority2Role', 14, 0, 1, -12);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-13, -1, 1,
+            'roleConfig-addRole', '新增角色', '', '/personal/role/toAddRole;/personal/role/saveRole', 13, 0, 1, -12);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-12, -1, 0,
+            'roleConfig', '角色配置', '/personal/role/pageList', '', 12, 0, 1, NULL);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-11, -1, 1,
+            'authorityConfig-sortAuthority', '权限排序', '',
+            '/personal/authority/toSortAuthority;/personal/authority/saveSortAuthority', 11, 0, 1, -1);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-10, -1, 1,
+            'authorityConfig-modifyAuthority', '编辑权限', '',
+            '/personal/authority/toModifyAuthority;/personal/authority/saveAuthorityInfo', 10, 0, 1, -1);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-9, -1, 1,
+            'authorityConfig-delAuthority', '删除权限', '', '/personal/authority/delAuthority', 9, 0, 1, -1);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-8, -1, 1,
+            'authorityConfig-viewAuthority', '权限详情', '', '/personal/authority/toViewAuthority', 8, 0, 1, -1);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-7, -1, 1,
+            'authorityConfig-addAuthority', '新增权限', '',
+            '/personal/authority/toAddAuthority;/personal/authority/saveAuthorityInfo', 7, 0, 1, -1);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-6, -1, 1,
+            'authorityConfig-sortGroup', '权限组排序', '',
+            '/personal/authorityGroup/toSortGroup;/personal/authorityGroup/saveSortGroup', 6, 0, 1, -1);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-5, -1, 1,
+            'authorityConfig-modifyGroup', '编辑分组', '',
+            '/personal/authorityGroup/toModifyGroup;/personal/authorityGroup/saveGroupInfo', 5, 0, 1, -1);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-4, -1, 1,
+            'authorityConfig-delGroup', '删除分组', '', '/personal/authorityGroup/delAuthorityGroup', 4, 0, 1, -1);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-3, -1, 1,
+            'authorityConfig-viewGroup', '分组详情', '', '/personal/authorityGroup/toView', 3, 0, 1, -1);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-2, -1, 1,
+            'authorityConfig-addGroup', '新增权限组', '',
+            '/personal/authorityGroup/toAddGroup;/personal/authorityGroup/saveGroupInfo', 2, 0, 1, -1);
+            INSERT INTO `authority_info` (`id`, `group_id`, `authority_type`, `authority_sign`, `authority_name`,
+            `action_url`, `url_filters`, `sort_num`, `delete_status`, `sys_built_in`, `parent_id`) VALUES (-1, -1, 0,
+            'authorityConfig', '权限配置', '/personal/authorityGroup/authorityConfig', '', 1, 0, 1, NULL);
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>

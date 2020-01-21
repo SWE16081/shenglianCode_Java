@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="create.table" author="linjh">
+        <createTable tableName="role_user" remarks="角色权限关联关系">
+            <column name="id" type="bigint" remarks="主键" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="role_id" type="bigint" remarks="角色id">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_id" type="bigint" remarks="用户id">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="sys_built_in" type="smallint" remarks="是否系统内置：0否、1是" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

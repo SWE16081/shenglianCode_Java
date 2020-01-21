@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="create.table" author="linjh">
+        <createTable tableName="demo" remarks="日志表">
+            <column name="logId" type="varchar(8)" remarks="唯一标识">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="userId" type="varchar(8)" remarks="运营商代码">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="userName" type="varchar(8)" remarks="运营商代码">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="logInfo" type="varchar(8)" remarks="运营商代码">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ipAddr" type="varchar(8)" remarks="运营商代码">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="moduleId" type="varchar(8)" remarks="运营商代码">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="bizId" type="varchar(8)" remarks="运营商代码">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="logTime" type="date" remarks="运营商代码">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

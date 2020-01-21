@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="init.cooper_isp.6" author="linjh">
+        <sql>
+DELETE FROM demo ;
+INSERT INTO demo (id, user_id, isp_code, region_code, attribution_code, name, default_desc, cp_img_url, dp_img_url, status, create_user, modify_user, create_time, modify_time) VALUES (1,1, '01', '0771', '0771_01', '广西联通', '及时购买流量套餐可避免流量超额产生高额费用：
+1.流量购买即时生效，当月流量随之增加
+2.次月需手动取消业务，否则将延续购买
+3.费用将从您剩余话费中扣除，请保证充足余额请核对您办理的业务归属', 'http://123.103.13.101:9100/staticresource/static/images/mato/common_package.png', 'http://123.103.13.101:9100/staticresource/static/images/mato/directional_package.png', 1, null, null, null, null);
+INSERT INTO demo (id, user_id, isp_code, region_code, attribution_code, name, default_desc, cp_img_url, dp_img_url, status, create_user, modify_user, create_time, modify_time) VALUES (2,2, '01', '0431', '0431_01', '吉林联通', '及时购买流量套餐可避免流量超额产生高额费用：
+1.流量购买即时生效，当月流量随之增加
+2.次月需手动取消业务，否则将延续购买
+3.费用将从您剩余话费中扣除，请保证充足余额请核对您办理的业务归属', 'http://123.103.13.101:9100/staticresource/static/images/mato/common_package.png', 'http://123.103.13.101:9100/staticresource/static/images/mato/directional_package.png', 1, null, null, null, null);
+INSERT INTO demo (id, user_id, isp_code, region_code, attribution_code, name, default_desc, cp_img_url, dp_img_url, status, create_user, modify_user, create_time, modify_time) VALUES (3,3, '00', '0591', '0591_00', '福建移动', '及时购买流量套餐可避免流量超额产生高额费用：
+1.流量购买即时生效，当月流量随之增加
+2.次月需手动取消业务，否则将延续购买
+3.费用将从您剩余话费中扣除，请保证充足余额请核对您办理的业务归属', 'http://123.103.13.101:9100/staticresource/static/images/mato/common_package.png', 'http://123.103.13.101:9100/staticresource/static/images/mato/directional_package.png', 1, null, null, null, null);
+INSERT INTO demo (id, user_id, isp_code, region_code, attribution_code, name, default_desc, cp_img_url, dp_img_url, status, create_user, modify_user, create_time, modify_time) VALUES (4,4, '01', '0591', '0591_01', '福建联通', '及时购买流量套餐可避免流量超额产生高额费用：
+1.流量购买即时生效，当月流量随之增加
+2.次月需手动取消业务，否则将延续购买
+3.费用将从您剩余话费中扣除，请保证充足余额请核对您办理的业务归属', 'http://123.103.13.101:9100/staticresource/static/images/mato/common_package.png', 'http://123.103.13.101:9100/staticresource/static/images/mato/directional_package.png', 1, null, null, null, null);
+        </sql>
+    </changeSet>
+    <changeSet id="init.demo.7" author="linjh">
+        <sql>
+DELETE FROM demo ;
+INSERT INTO demo (id, isp_code, region_code, attribution_code, name, default_desc, cp_img_url, dp_img_url, status, create_user, modify_user, create_time, modify_time, user_id) VALUES (1, '01', '0771', '0771_01', '广西联通', '及时购买流量套餐可避免流量超额产生高额费用：
+1.流量购买即时生效，当月流量随之增加
+2.次月需手动取消业务，否则将延续购买
+3.费用将从您剩余话费中扣除，请保证充足余额请核对您办理的业务归属', 'http://123.103.13.101:9100/staticresource/static/images/mato/common_package.png', 'http://123.103.13.101:9100/staticresource/static/images/mato/directional_package.png', 1, null, null, null, null, 2);
+INSERT INTO demo (id, isp_code, region_code, attribution_code, name, default_desc, cp_img_url, dp_img_url, status, create_user, modify_user, create_time, modify_time, user_id) VALUES (2, '01', '0431', '0431_01', '吉林联通', '及时购买流量套餐可避免流量超额产生高额费用：
+1.流量购买即时生效，当月流量随之增加
+2.次月需手动取消业务，否则将延续购买
+3.费用将从您剩余话费中扣除，请保证充足余额请核对您办理的业务归属', 'http://123.103.13.101:9100/staticresource/static/images/mato/common_package.png', 'http://123.103.13.101:9100/staticresource/static/images/mato/directional_package.png', 1, null, null, null, null, 4);
+INSERT INTO demo (id, isp_code, region_code, attribution_code, name, default_desc, cp_img_url, dp_img_url, status, create_user, modify_user, create_time, modify_time, user_id) VALUES (3, '00', '0591', '0591_00', '福建移动', '及时购买流量套餐可避免流量超额产生高额费用：
+1.流量购买即时生效，当月流量随之增加
+2.次月需手动取消业务，否则将延续购买
+3.费用将从您剩余话费中扣除，请保证充足余额请核对您办理的业务归属', 'http://123.103.13.101:9100/staticresource/static/images/mato/common_package.png', 'http://123.103.13.101:9100/staticresource/static/images/mato/directional_package.png', 1, null, null, null, null, 5);
+INSERT INTO demo (id, isp_code, region_code, attribution_code, name, default_desc, cp_img_url, dp_img_url, status, create_user, modify_user, create_time, modify_time, user_id) VALUES (4, '01', '0591', '0591_01', '福建联通', '及时购买流量套餐可避免流量超额产生高额费用：
+1.流量购买即时生效，当月流量随之增加
+2.次月需手动取消业务，否则将延续购买
+3.费用将从您剩余话费中扣除，请保证充足余额请核对您办理的业务归属', 'http://123.103.13.101:9100/staticresource/static/images/mato/common_package.png', 'http://123.103.13.101:9100/staticresource/static/images/mato/directional_package.png', 1, null, null, null, null, 6);
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
